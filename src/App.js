@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Home from './components/Home'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import ShowData from './components/ShowData';
+import Showbackend from './components/Showbackend';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <div className='App'>
+        <Navbar bg="light" expand="lg">
+          <Container fluid>
+            <Navbar.Brand href="#">Navbar</Navbar.Brand>
+            <div className='d-flex'>
+              <Navbar.Brand href="/">Home</Navbar.Brand>
+              <Navbar.Brand href="/showdata">ShowData</Navbar.Brand>
+              <Navbar.Brand href="/showbackend">Showbackend</Navbar.Brand>
+            </div>
+          </Container>
+        </Navbar>
+        <div>
+          <Routes>
+            <Route path='/' element={<Home />}></Route>
+            <Route path='/showdata' element={<ShowData />}></Route>
+            <Route path='/showbackend' element={<Showbackend />}></Route>
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
