@@ -1,15 +1,12 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import Axios from 'axios'
 
 
-
-const App = (props) => {
+const App = () => {
     const data = { name: "", email: "", password: "" }
     const [inputData, setInputData] = useState(data)
     const [flag, setFlag] = useState(false)
-    const [user, setUser] = useState(false)
-    let navigate = useNavigate()
     useEffect(() => {
         console.log("Register")
     }, [flag])
@@ -24,11 +21,18 @@ const App = (props) => {
         } else {
             setFlag(true)
         }
-        console.log(inputData)
-        navigate('/showdata');
-
+        Axios.post("http://localhost:8000/userinfo", {
+            name: inputData.name,
+            email: inputData.email,
+            password: inputData.password
+        })
+            .then((res) => {
+                console.log(res.data)
+            }).catch((err) => {
+                console.log(err)
+            })
     }
-  
+
     return (
         <>
             <div className="container  mt-5">
